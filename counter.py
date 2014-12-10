@@ -14,37 +14,39 @@ def file_len(fname):
     else:
         return i
 
+class month_total:
+    def __init__(self,total_len=0,ave_hour=0,num_files=0):
+        self.total_len = total_len
+        self.ave_hour = ave_hour
+        self.num_files = num_files
+
+month_totals = {
+    "1":month_total(),
+    "2":month_total(),
+    "3":month_total(),
+    "4":month_total(),
+    "5":month_total(),
+    "6":month_total(),
+    "7":month_total(),
+    "8":month_total(),
+    "9":month_total(),
+    "10":month_total(),
+    "11":month_total(),
+    "12":month_total()
+}
 
 parser = argparse.ArgumentParser()
 parser.add_argument('extension',nargs=1)
-parser.add_argument('duration',nargs=1)
 parser.add_argument('roots',nargs='*')
 args = parser.parse_args()
 extension = args.extension[0]
 roots = args.roots
-duration = args.duration
 
-if duration == 'year':
-    total_len = 0
-    ave_hour = 0
-    num_files = 0
 
-if duration == 'month':
-    month_totals = {
-        "1":[],
-        "2":[],
-        "3":[],
-        "4":[],
-        "5":[],
-        "6":[],
-        "7":[],
-        "8":[],
-        "9":[],
-        "10":[],
-        "11":[],
-        "12":[]
-    }
-    
+
+total_len = 0
+ave_hour = 0
+num_files = 0
 
 for root in roots:
     for rootdir,dir,files in os.walk(root):
@@ -55,7 +57,8 @@ for root in roots:
                 if duration == 'month':
                     month = datetime.datetime.fromtimestamp(os.stat(file).st_ctime).strftime("%m")
                     hour = int(datetime.datetime.fromtimestamp(os.stat(file).st_ctime).strftime("%H"))
-                    
+                    month_totals[month].num_files += 1
+                    month_totals[month].
                 total_len += file_len(file)
     
     print total_len
