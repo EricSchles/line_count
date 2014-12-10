@@ -32,7 +32,7 @@ month_totals = {
     "09":month_total(),
     "10":month_total(),
     "11":month_total(),
-    "12":month_total(),
+    "12":month_total()
 }
 
 parser = argparse.ArgumentParser()
