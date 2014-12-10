@@ -42,8 +42,6 @@ args = parser.parse_args()
 extension = args.extension[0]
 roots = args.roots
 
-
-
 total_len = 0
 ave_hour = 0
 num_files = 0
@@ -52,16 +50,19 @@ for root in roots:
     for rootdir,dir,files in os.walk(root):
         for file in files:
             if file.endswith(extension):
-                num_files += 1
                 file = os.path.join(rootdir,file)
-                if duration == 'month':
-                    month = datetime.datetime.fromtimestamp(os.stat(file).st_ctime).strftime("%m")
-                    hour = int(datetime.datetime.fromtimestamp(os.stat(file).st_ctime).strftime("%H"))
-                    month_totals[month].num_files += 1
-                    month_totals[month].
-                total_len += file_len(file)
+                month = datetime.datetime.fromtimestamp(os.stat(file).st_ctime).strftime("%m")
+                hour = int(datetime.datetime.fromtimestamp(os.stat(file).st_ctime).strftime("%H"))
+
+                month_totals[month].num_files += 1 #per month
+                num_files += 1 #total
+
+                month_totals[month].ave_hour += hour #per month
+                ave_hour += hour #total
+
+                month_totals[month].total_len += file_len(file) #per month
+                total_len += file_len(file) #total
     
-    print total_len
                 
         
                 
