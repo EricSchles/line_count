@@ -62,7 +62,15 @@ for root in roots:
 
                 month_totals[month].total_len += file_len(file) #per month
                 total_len += file_len(file) #total
-    
+
+print "You worked best between %s and %s so far" % (str(ave_hour/num_files),str((ave_hour/num_files) + 1))
+print "You've written %d lines so far." % total_len
                 
-        
+for month in month_totals:
+    month_totals[month].ave_hour = month_totals[month].ave_hour/month_totals[month].num_files
+    print "You worked best between %s and %s so far" % (str(month_totals[month].ave_hour),str((month_totals[month].ave_hour + 1))
+    print "You've written %d lines so far." % month_totals[month].total_len
+
+
+
                 
