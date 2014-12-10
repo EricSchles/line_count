@@ -52,7 +52,7 @@ num_files = 0
 for root in roots:
     for rootdir,dir,files in os.walk(root):
         for file in files:
-            if file.endswith(extension):
+            if file.endswith(extension) and not file.startswith("."):
                 file = os.path.join(rootdir,file)
                 month = datetime.datetime.fromtimestamp(os.stat(file).st_ctime).strftime("%m")
                 hour = int(datetime.datetime.fromtimestamp(os.stat(file).st_ctime).strftime("%H"))
