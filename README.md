@@ -4,13 +4,13 @@ This project counts the total number of lines of a given file extension across a
 
 #To use:
 
-python line_count/run.py [list of root directories]
+python line_count/counter.py [extension] [list of root directories]
 
 specific examples:
 
-python line_count/run.py ~ /mnt/hfgs/
+python line_count/counter.py .py ~ /mnt/hfgs/
 
-python line_count/run.py
+python line_count/counter.py .py
 --if no directory is passed in home directory is run by default
 
 

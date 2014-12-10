@@ -42,6 +42,9 @@ args = parser.parse_args()
 extension = args.extension[0]
 roots = args.roots
 
+if roots == []:
+    roots.append("~")
+
 total_len = 0
 ave_hour = 0
 num_files = 0
