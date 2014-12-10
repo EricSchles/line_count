@@ -33,18 +33,6 @@ month_totals = {
     "10":month_total(),
     "11":month_total(),
     "12":month_total(),
-    "13":month_total(),
-    "14":month_total(),
-    "15":month_total(),
-    "16":month_total(),
-    "17":month_total(),
-    "18":month_total(),
-    "19":month_total(),
-    "20":month_total(),
-    "21":month_total(),
-    "22":month_total(),
-    "23":month_total(),
-    "24":month_total()
 }
 
 parser = argparse.ArgumentParser()
@@ -77,9 +65,14 @@ for root in roots:
 
 print "You worked best between %s and %s so far" % (str(ave_hour/num_files),str((ave_hour/num_files) + 1))
 print "You've written %d lines so far." % total_len
-                
+    
+month_translate            
 for month in month_totals:
-    month_totals[month].ave_hour = month_totals[month].ave_hour/month_totals[month].num_files
+    
+    if month_totals[month].num_files != 0:
+        month_totals[month].ave_hour = month_totals[month].ave_hour/month_totals[month].num_files
+    else:
+        month_totals[month].ave_hour = 0
     print "You worked best between %s and %s so far" % (str(month_totals[month].ave_hour),str(month_totals[month].ave_hour + 1))
     print "You've written %d lines so far." % (month_totals[month].total_len)
 
