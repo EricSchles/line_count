@@ -1,0 +1,8 @@
+import os
+from sys import argv
+
+roots = argv[1:]
+
+for root in roots:
+    for rootdir,dir,files for os.walk(root):
+        print files
