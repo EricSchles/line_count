@@ -38,8 +38,6 @@ def main(extension,roots=[]):
         "12":month_total()
     }
 
-
-
     if roots == []:
         roots.append("~")
 
@@ -93,8 +91,6 @@ def main(extension,roots=[]):
         print "You worked best between %s and %s so far" % (str(month_totals[month].ave_hour),str(month_totals[month].ave_hour + 1))
         print "You've written %d lines so far." % (month_totals[month].total_len)
         print 
-
-
                 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
