@@ -21,7 +21,7 @@ class month_total:
         self.num_files = num_files
 
 
-def main(extension,roots=[]):
+def main(extension,roots=[],show_dirs=False):
 
     month_totals = {
         "01":month_total(),
@@ -48,6 +48,10 @@ def main(extension,roots=[]):
     for root in roots:
         for rootdir,dir,files in os.walk(root):
             for file in files:
+                if show_dirs:
+                    print dir
+                    if file.endswith(extension) and not file.startswith("."):
+                        print file
                 if file.endswith(extension) and not file.startswith("."):
                     file = os.path.join(rootdir,file)
                     month = datetime.datetime.fromtimestamp(os.stat(file).st_ctime).strftime("%m")
@@ -96,7 +100,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('extension',nargs=1)
     parser.add_argument('roots',nargs='*')
+    parser.add_argument('--show-dirs',bool=False)
     args = parser.parse_args()
     extension = args.extension[0]
     roots = args.roots
-    main(extension,roots=roots)
+    show_dirs = args.show_dirs
+    main(extension,roots=roots,show_dirs=show_dirs)
