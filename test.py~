@@ -1,0 +1,4 @@
+import os
+
+for rootdir,dir,files in os.walk("/home/vhaisaschlee/Documents"):
+    print "hello"

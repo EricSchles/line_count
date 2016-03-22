@@ -41,17 +41,23 @@ def main(extension,roots=[],show_dirs=False):
     if roots == []:
         roots.append("~")
 
+    print roots
     total_len = 0
     ave_hour = 0
     num_files = 0
 
+    total_dirs = []
+    files_checked = []
     for root in roots:
         for rootdir,dir,files in os.walk(root):
             for file in files:
                 if show_dirs:
-                    print dir
+                    if dir != []:
+                        for elem in dir:
+                            if not elem in total_dirs:
+                                total_dirs.append(elem)
                     if file.endswith(extension) and not file.startswith("."):
-                        print file
+                        files_checked.append(file)
                 if file.endswith(extension) and not file.startswith("."):
                     file = os.path.join(rootdir,file)
                     month = datetime.datetime.fromtimestamp(os.stat(file).st_ctime).strftime("%m")
@@ -65,7 +71,9 @@ def main(extension,roots=[],show_dirs=False):
 
                     month_totals[month].total_len += file_len(file) #per month
                     total_len += file_len(file) #total
-
+    if show_dirs:
+        print total_dirs
+        print files_checked
     print "You worked best between %s and %s so far" % (str(ave_hour/num_files),str((ave_hour/num_files) + 1))
     print "You've written %d lines so far." % total_len
     print 
@@ -100,7 +108,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('extension',nargs=1)
     parser.add_argument('roots',nargs='*')
-    parser.add_argument('--show-dirs',bool=False)
+    parser.add_argument('--show-dirs',type=bool)
     args = parser.parse_args()
     extension = args.extension[0]
     roots = args.roots
